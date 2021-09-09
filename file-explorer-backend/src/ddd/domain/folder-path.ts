@@ -1,19 +1,16 @@
 export class FolderPath {
+  private value: string;
 
-   private value: string;
+  constructor(value: string) {
+    this.ensurePath(value);
+    this.value = value;
+  }
 
-   constructor(value: string) {
-      this.ensurePath(value);
-      this.value = value;
-   }
+  private ensurePath(value: string): void {
+    if (value === null || value.length === 0) throw new Error('Path Invalid');
+  }
 
-   private ensurePath(value: string): void {
-      if (value === null || value.length === 0)
-         throw new Error('Path Invalid');
-   }
-
-   public getValue(): string {
-      return this.value;
-   }
-
+  public getValue(): string {
+    return this.value;
+  }
 }

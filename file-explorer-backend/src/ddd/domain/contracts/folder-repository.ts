@@ -1,7 +1,7 @@
-import { File } from "../file";
-import { FolderPath } from "../folder-path";
+import { File } from '../file';
+import { FolderPath } from '../folder-path';
 
 export interface FolderRepository {
-   verifyPath(path: FolderPath): boolean;
-   findFiles(path: FolderPath): File;
+  verifyPath(path: FolderPath): boolean;
+  findFiles(path: FolderPath): File;
 }

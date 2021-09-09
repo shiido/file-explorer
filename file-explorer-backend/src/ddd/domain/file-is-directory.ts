@@ -1,13 +1,11 @@
 export class FileIsDirectory {
+  private value: boolean;
 
-   private value: boolean;
+  constructor(value: boolean) {
+    this.value = value;
+  }
 
-   constructor(value: boolean) {
-      this.value = value;
-   }
-
-   public getValue(): boolean {
-      return this.value;
-   }
-
+  public getValue(): boolean {
+    return this.value;
+  }
 }

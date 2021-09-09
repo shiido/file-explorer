@@ -1,13 +1,11 @@
 export class DirectoryWatcherCommand {
+  private path: string;
 
-   private path: string;
+  constructor(path: string) {
+    this.path = path;
+  }
 
-   constructor(path: string) {
-      this.path = path;
-   }
-
-   public getPath(): string {
-      return this.path;
-   }
-
+  public getPath(): string {
+    return this.path;
+  }
 }

@@ -1,25 +1,25 @@
+import { Logger } from '@nestjs/common';
 import {
-  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
+  MessageBody,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
-  WsResponse
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import * as path from 'path';
+
 import { FileFinder } from '../application/find-files-from-directory/file-finder';
 import { FileFinderQuery } from '../application/find-files-from-directory/file-finder-query';
-import { Logger } from '@nestjs/common';
 import { DirectoryWatcher } from '../application/monitor-directory/directory-watcher';
 import { DirectoryWatcherCommand } from '../application/monitor-directory/directory-watcher-command';
 import { LocalEventBus } from '../infrasctructure/local-event-bus';
-import * as path from 'path';
-
 @WebSocketGateway(8081)
-export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-
+export class SocketGateway
+  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
+{
   private readonly logger = new Logger(SocketGateway.name);
 
   @WebSocketServer()
@@ -29,7 +29,7 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
 
   constructor(
     private fileFinder: FileFinder,
-    private directoryWatcher: DirectoryWatcher
+    private directoryWatcher: DirectoryWatcher,
   ) {
     this.directories = [];
   }
@@ -41,25 +41,24 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
 
     LocalEventBus.getInstance().register('monitor', (data: any) => {
       if (data) {
-
         const folderResponse = [];
 
-        this.directories.forEach(directory => {
-
+        this.directories.forEach((directory) => {
           // get files from directory with changes
-          const fileResponse = this.fileFinder.handle(new FileFinderQuery(directory));
+          const fileResponse = this.fileFinder.handle(
+            new FileFinderQuery(directory),
+          );
           folderResponse.push(fileResponse);
-
         });
 
         const response = {
-          folderResponse, event: data
+          folderResponse,
+          event: data,
         };
 
         server.emit('refresh', response);
       }
     });
-
   }
 
   handleConnection(client: Socket, ...args: any[]) {
@@ -72,9 +71,8 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
 
   @SubscribeMessage('monitoring')
   async findFiles(@MessageBody() folders: Array<string>): Promise<any> {
-
     const foldersToUse = [];
-    folders.forEach(folder => {
+    folders.forEach((folder) => {
       folder = this.cleanPath(folder);
       if (!this.hasItBeenAdded(folder)) {
         foldersToUse.push(folder);
@@ -87,43 +85,45 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   @SubscribeMessage('new-monitoring')
   async registerNewDirectory(@MessageBody() folder: string): Promise<void> {
     folder = this.cleanPath(folder);
-    const directories = this.handleFolderResponse(this.directories.concat(folder));
+    const directories = this.handleFolderResponse(
+      this.directories.concat(folder),
+    );
     this.server.emit('new-directory', directories);
   }
 
   private handleFolderResponse(folders: string[]): any[] {
-
     const folderResponse = [];
 
-    folders.forEach(pathDirectory => {
-
+    folders.forEach((pathDirectory) => {
       try {
-
         // get files from directory
-        const fileResponse = this.fileFinder.handle(new FileFinderQuery(pathDirectory));
+        const fileResponse = this.fileFinder.handle(
+          new FileFinderQuery(pathDirectory),
+        );
         folderResponse.push(fileResponse);
 
         // verify if folders have already been added
         if (!this.hasItBeenAdded(pathDirectory)) {
-
           this.directories.push(pathDirectory);
 
           // start monitoring from directory
-          this.directoryWatcher.handle(new DirectoryWatcherCommand(pathDirectory));
+          this.directoryWatcher.handle(
+            new DirectoryWatcherCommand(pathDirectory),
+          );
         }
-
       } catch (e) {
         this.logger.warn(`Directory Invalid`);
       }
-
     });
 
     return folderResponse;
   }
 
   private hasItBeenAdded(searchDirectory: string): boolean {
-    const found = this.directories.find(directory => directory === searchDirectory);
-    return (found) ? true : false;
+    const found = this.directories.find(
+      (directory) => directory === searchDirectory,
+    );
+    return found ? true : false;
   }
 
   private cleanPath(folder: string) {
@@ -133,5 +133,4 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     }
     return folder;
   }
-
 }

@@ -1,16 +1,16 @@
 export interface Registry {
-   unregister: () => void;
+  unregister: () => void;
 }
 
 export interface Callable {
-   [key: string]: Function;
+  [key: string]: any;
 }
 
 export interface Subscriber {
-   [key: string]: Callable;
+  [key: string]: Callable;
 }
 
 export interface IEventBus {
-   dispatch<T>(event: string, arg?: T): void;
-   register(event: string, callback: Function): Registry;
+  dispatch<T>(event: string, arg?: T): void;
+  register(event: string, callback: any): Registry;
 }
