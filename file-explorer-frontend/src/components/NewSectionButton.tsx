@@ -27,11 +27,11 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
 
    return <>
 
-      <Button onClick={onOpen} bg="teal.400" colorScheme="teal" variant="solid">
+      <Button onClick={onOpen} bg="teal.400" colorScheme="teal" variant="solid" role="new-directory-button">
          Add New Directory
       </Button>
 
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose} id="new-directory-modal">
 
          <ModalOverlay />
 
@@ -47,7 +47,7 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
 
                      <FormLabel htmlFor="directory">Directory</FormLabel>
 
-                     <Input size="xs" id="directory" placeholder="Enter the directory to monitoring"
+                     <Input role="new-directory-input" size="xs" id="directory" placeholder="Enter the directory to monitoring"
                         {
                         ...register("directory",
                            {
@@ -56,7 +56,7 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
                         }
                      />
 
-                     <FormErrorMessage>{errors.directory && errors.directory.message}</FormErrorMessage>
+                     <FormErrorMessage role="error-message">{errors.directory && errors.directory.message}</FormErrorMessage>
 
                   </FormControl>
 
@@ -64,11 +64,11 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
 
                <ModalFooter>
 
-                  <Button colorScheme="teal" bg="red.500" size="sm" variant="solid" mr={3} onClick={onClose}>
+                  <Button role="cancel-modal-button" colorScheme="teal" bg="red.500" size="sm" variant="solid" mr={3} onClick={onClose}>
                      Cancel
                   </Button>
 
-                  <Button isLoading={isSubmitting} bg="cyan.600" colorScheme="teal" variant="solid" size="sm" type="submit">
+                  <Button role="accept-modal-button" isLoading={isSubmitting} bg="cyan.600" colorScheme="teal" variant="solid" size="sm" type="submit">
                      Monitoring
                   </Button>
 
