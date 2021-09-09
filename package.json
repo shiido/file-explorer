@@ -1,0 +1,8 @@
+{
+   "dependencies": {
+      "node-cmd": "^5.0.0"
+   },
+   "scripts": {
+      "postinstall": "(cd file-explorer-backend && npm install); (cd file-explorer-frontend && npm install); "
+   }
+}
