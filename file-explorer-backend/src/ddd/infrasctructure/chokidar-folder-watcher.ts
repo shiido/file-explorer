@@ -7,7 +7,7 @@ import { LocalEventBus } from '../infrasctructure/local-event-bus';
 
 @Injectable()
 export class ChokidarFolderWatcher implements FolderWatcher {
-  monitor(folderPath: FolderPath): void {
+  monitor(folderPath: FolderPath): boolean {
     const watcher = chokidar.watch(folderPath.getValue(), {
       ignoreInitial: true,
       persistent: true,
@@ -32,6 +32,8 @@ export class ChokidarFolderWatcher implements FolderWatcher {
       .on('unlinkDir', (path: string) =>
         this.onUnlinkDir(path, folderPath.getValue()),
       );
+
+    return true;
   }
 
   private onAdd(path: string, directory: string) {

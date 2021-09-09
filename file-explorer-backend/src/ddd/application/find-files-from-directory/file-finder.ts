@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
-import { File } from 'src/ddd/domain/file';
-import { FolderPath } from 'src/ddd/domain/folder-path';
-import { FSFolderRepository } from 'src/ddd/infrasctructure/fs-folder-repository';
+import { File } from '../../domain/file';
+import { FolderPath } from '../../domain/folder-path';
 import { FileFinderQuery } from './file-finder-query';
 import { FileResponse } from '../file-response';
+import { FolderRepository } from '../../../ddd/domain/contracts/folder-repository';
 
 @Injectable()
 export class FileFinder {
-  constructor(private folderRepository: FSFolderRepository) {}
+  constructor(
+    @Inject('FolderRepository')
+    private readonly folderRepository: FolderRepository,
+  ) {}
 
   public handle(query: FileFinderQuery): FileResponse {
     const folderPath = new FolderPath(query.getPath());

@@ -1,15 +1,16 @@
-import { Injectable } from '@nestjs/common';
-
-import { FolderPath } from 'src/ddd/domain/folder-path';
-import { ChokidarFolderWatcher } from 'src/ddd/infrasctructure/chokidar-folder-watcher';
-import { FSFolderRepository } from 'src/ddd/infrasctructure/fs-folder-repository';
+import { Inject, Injectable } from '@nestjs/common';
+import { FolderRepository } from '../../../ddd/domain/contracts/folder-repository';
+import { FolderWatcher } from '../../../ddd/domain/contracts/folder-watcher';
+import { FolderPath } from '../../../ddd/domain/folder-path';
 import { DirectoryWatcherCommand } from './directory-watcher-command';
 
 @Injectable()
 export class DirectoryWatcher {
   constructor(
-    private readonly folderRepository: FSFolderRepository,
-    private readonly chokidarFolderWatcher: ChokidarFolderWatcher,
+    @Inject('FolderRepository')
+    private readonly folderRepository: FolderRepository,
+    @Inject('FolderWatcher')
+    private readonly chokidarFolderWatcher: FolderWatcher,
   ) {}
 
   public handle(command: DirectoryWatcherCommand): void {
@@ -18,7 +19,7 @@ export class DirectoryWatcher {
     const directoryExists = this.folderRepository.verifyPath(folderPath);
 
     if (!directoryExists) {
-      throw new Error('Folder does not exists');
+      throw new Error(`Folder ${folderPath.getValue()} does not exists`);
     }
 
     this.chokidarFolderWatcher.monitor(folderPath);

@@ -10,9 +10,15 @@ import { FSFolderRepository } from './infrasctructure/fs-folder-repository';
   providers: [
     SocketGateway,
     FileFinder,
-    FSFolderRepository,
     DirectoryWatcher,
-    ChokidarFolderWatcher,
+    {
+      provide: 'FolderRepository',
+      useClass: FSFolderRepository,
+    },
+    {
+      provide: 'FolderWatcher',
+      useClass: ChokidarFolderWatcher,
+    },
   ],
 })
 export class DDDModule {}
