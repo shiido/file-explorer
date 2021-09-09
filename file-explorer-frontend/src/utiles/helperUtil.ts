@@ -1,6 +1,3 @@
-// Store
-import { store } from '@/redux/store';
-
 // Utils
 import notify from '@/utiles/toastUtil';
 

@@ -3,16 +3,15 @@ import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import { ChakraProvider } from '@chakra-ui/react';
 
-import TodoCard from '@/components/TodoCard';
+import IndexPage from '@/pages/IndexPage';
 
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <Provider store={store}>
       <ChakraProvider resetCSS={false}>
-        <TodoCard />
+        <IndexPage />
       </ChakraProvider>
     </Provider>
   );

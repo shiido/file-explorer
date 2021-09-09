@@ -19,6 +19,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-folder-tree": "^5.0.3",
+    "react-hook-form": "^7.15.1",
     "react-redux": "^7.2.5",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
@@ -29,7 +30,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "set REACT_APP_NOT_SECRET_CODE=abcdef & REACT_APP_NOT_SECRET_CODE=abcdef react-app-rewired start",
+    "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"

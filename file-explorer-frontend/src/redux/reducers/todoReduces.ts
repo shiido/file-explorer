@@ -9,6 +9,9 @@ const initialState = {
    loading: {
       all: false,
    },
+   sample: {
+      folders: [] as any,
+   }
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +20,10 @@ const reducer = (state = initialState, action) => {
    switch (type) {
       case Types.TODO_FIND_RECEIVE: {
          state.data.all = payload.data;
+         return;
+      }
+      case Types.FILES_FIND: {
+         state.sample.folders = payload.data;
          return;
       }
       default:
