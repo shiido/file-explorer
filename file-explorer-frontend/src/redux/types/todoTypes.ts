@@ -1,5 +1,0 @@
-export default {
-   TODO_FIND: 'TODO_FIND',
-   TODO_FIND_RECEIVE: 'TODO_FIND_RECEIVE',
-   FILES_FIND: 'FILES_FIND'
-};

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { SimpleGrid, Wrap, WrapItem, Center } from '@chakra-ui/react';
+import { Wrap, Center, Box, Text } from '@chakra-ui/react';
 
-// Utils
+// utiles
 import notify from '@/utiles/toastUtil';
-
-// Actions
-import { onFilesFind } from '@/redux/actions/todoActions';
-
 import socket from '@/utiles/socketUtil';
 
+// actions
+import { onFilesFind } from '@/redux/actions/directoryActions';
+
+// components
 import SectionDirectory from '@/components/SectionDirectory';
 import NewSectionButton from '@/components/NewSectionButton';
 
@@ -18,13 +18,10 @@ const IndexPage: React.FC = () => {
    const dispatch = useDispatch();
 
    const folders = process.env.REACT_APP_FOLDERS;
-   console.log('folders', folders)
 
-   const files: any[] = useSelector((state: RootStateOrAny) => state.todo.sample.folders);
+   const files: any[] = useSelector((state: RootStateOrAny) => state.directory.sample.folders);
 
    const handleNotify = (data: any) => {
-
-      console.log('notify', data);
 
       let status = '';
       let description = '';
@@ -43,14 +40,13 @@ const IndexPage: React.FC = () => {
          status,
          description,
          title: 'New Change',
-         duration: 5000,
+         duration: 8000,
          position: 'bottom-right'
       });
 
    }
 
    const handleRegisterNewDirectory = (data: any) => {
-      console.log('Here.', data, socket);
       socket.emit('new-monitoring', data.directory);
    }
 
@@ -71,16 +67,16 @@ const IndexPage: React.FC = () => {
          });
 
          socket.on('new-directory', function (data) {
-            console.log('data', data)
             dispatch(onFilesFind(data));
          });
 
-         socket.on('exception', function (data) {
-            console.log('event', data);
-         });
-
          socket.on('disconnect', function () {
-            console.log('Disconnected');
+            notify({
+               status: 'error',
+               title: 'Disconnect',
+               duration: 2000,
+               position: 'bottom-left'
+            });
          });
 
          return () => {
@@ -88,19 +84,28 @@ const IndexPage: React.FC = () => {
          };
 
       },
+      // eslint-disable-next-line
       []
    );
 
    return <>
-      <SimpleGrid columns={1} spacing={2}>
-         {files.map((item, index) => {
-            return <SectionDirectory key={index} data={item} />
-         })}
+      <Box bg="gray.700">
 
-         <NewSectionButton handleRegisterNewDirectory={handleRegisterNewDirectory} />
+         <Text fontSize="6xl" textAlign="center" color="white">File Explorer</Text>
 
-      </SimpleGrid>
+         <Wrap spacing="30px" align="center" justify="center">
+            {files.map((item, index) => {
+               return <SectionDirectory key={index} data={item} />
+            })}
+         </Wrap>
 
+         <Box p={5} m={5}>
+            <Center>
+               <NewSectionButton handleRegisterNewDirectory={handleRegisterNewDirectory} />
+            </Center>
+         </Box>
+
+      </Box>
    </>;
 };
 

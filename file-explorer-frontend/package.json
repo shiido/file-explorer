@@ -1,7 +1,16 @@
 {
   "name": "file-explorer-frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "Frontend",
+  "author": "Jhon Freddy Rondon",
+  "keywords": [
+    "file-explorer",
+    "typescript",
+    "react",
+    "redux",
+    "websockets"
+  ],
   "dependencies": {
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11",

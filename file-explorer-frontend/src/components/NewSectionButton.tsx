@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {
-   Button, Modal,
+   Button,
+   Modal,
    ModalOverlay,
    ModalContent,
    ModalHeader,
@@ -13,7 +14,6 @@ import {
    FormErrorMessage,
    Input
 } from '@chakra-ui/react';
-
 import { useForm } from 'react-hook-form';
 
 interface FuncProps {
@@ -26,7 +26,8 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm();
 
    return <>
-      <Button onClick={onOpen} bg="cyan.600" colorScheme="teal" variant="solid">
+
+      <Button onClick={onOpen} bg="teal.400" colorScheme="teal" variant="solid">
          Add New Directory
       </Button>
 
@@ -44,14 +45,9 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
 
                   <FormControl isInvalid={errors.directory}>
 
-                     <FormLabel htmlFor="directory">
-                        Directory
-                     </FormLabel>
+                     <FormLabel htmlFor="directory">Directory</FormLabel>
 
-                     <Input
-                        size="xs"
-                        id="directory"
-                        placeholder="Enter the directory to monitoring"
+                     <Input size="xs" id="directory" placeholder="Enter the directory to monitoring"
                         {
                         ...register("directory",
                            {
@@ -60,16 +56,14 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
                         }
                      />
 
-                     <FormErrorMessage>
-                        {errors.directory && errors.directory.message}
-                     </FormErrorMessage>
+                     <FormErrorMessage>{errors.directory && errors.directory.message}</FormErrorMessage>
 
                   </FormControl>
 
                </ModalBody>
 
                <ModalFooter>
-                  
+
                   <Button colorScheme="teal" bg="red.500" size="sm" variant="solid" mr={3} onClick={onClose}>
                      Cancel
                   </Button>
@@ -77,6 +71,7 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
                   <Button isLoading={isSubmitting} bg="cyan.600" colorScheme="teal" variant="solid" size="sm" type="submit">
                      Monitoring
                   </Button>
+
                </ModalFooter>
 
             </form>

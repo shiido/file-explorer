@@ -1,24 +1,23 @@
-// Libs
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { all } from 'redux-saga/effects'; // defaults to localStorage for web
+import { all } from 'redux-saga/effects';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-// Reducers
-import todoReduces from '@/redux/reducers/todoReduces';
+// reducers
+import directoryReduces from '@/redux/reducers/directoryReduces';
 
-// Sagas
-import todoSagas from '@/redux/sagas/todoSagas';
+// sagas
+import directorySagas from '@/redux/sagas/directorySagas';
 
-// Add Reducers
+// add reducers
 const reducers = {
-   todo: todoReduces,
+   directory: directoryReduces,
 };
 
-// Add Sagas
+// add Sagas
 function* rootSaga() {
    yield all([
-      ...todoSagas
+      ...directorySagas
    ]);
 }
 
@@ -39,13 +38,12 @@ const composeEnhancers = composeWithDevTools({
 // enhancers
 const enhancers = composeEnhancers(
    applyMiddleware(...middlewares, sagaMiddleware)
-   // other store enhancers if any
 );
 
 // store
 const store = createStore(rootReducer, enhancers);
 
-// Run saga
+// run saga
 sagaMiddleware.run(rootSaga);
 
 export { store };
