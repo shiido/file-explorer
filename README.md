@@ -29,8 +29,10 @@ For further details [Click Here!](./file-explorer-frontend/README.md)
 
 # Requirements
 
-- node **v12.16.3**
-- npm **v6.14.4**
+- node **v10.15.3** or higher
+- npm **v6.4.1** or higher
+
+It is important that you do not have any connection on ports **3011**, **8081** and **3000**
 
 # Technologies
 
@@ -55,7 +57,9 @@ $ npm install
 $ node file-explorer.js ~/Desktop
 ```
 
-The backend server will open here: http://localhost:3011
+The backend server will start here: http://localhost:3011
+
+The websocket server will start on port **8081**
 
 The frontend app will open here: http://localhost:3000
 

@@ -11,8 +11,10 @@ Frontend App allows:
 
 # Requirements
 
-- node **v12.16.3**
-- npm **v6.14.4**
+- node **v10.15.3** or higher
+- npm **v6.4.1** or higher
+
+It is important that you do not have any connection on port **3000**
 
 # Technologies
 

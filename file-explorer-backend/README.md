@@ -12,8 +12,10 @@ Backend Server allows:
 
 # Requirements
 
-- node **v12.16.3**
-- npm **v6.14.4**
+- node **v10.15.3** or higher
+- npm **v6.4.1** or higher
+
+It is important that you do not have any connection on ports **3011** and **8081**
 
 # Technologies
 
@@ -48,7 +50,9 @@ $ npm install
 $ npm run start
 ```
 
-The server will start here: http://localhost:3011
+The app server will start here: http://localhost:3011
+
+The websocket server will start on port **8081**
 
 # Test
 
