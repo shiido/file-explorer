@@ -1,7 +1,8 @@
 {
    "dependencies": {
       "chalk": "^4.1.2",
-      "node-cmd": "^5.0.0"
+      "node-cmd": "^5.0.0",
+      "tcp-port-used": "^1.0.2"
    },
    "scripts": {
       "postinstall": "(cd file-explorer-backend && npm install); (cd file-explorer-frontend && npm install); "
