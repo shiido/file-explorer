@@ -29,7 +29,7 @@ test('check if modal has components (buttons, inputs)', () => {
 
   const inputEl = screen.getByRole('new-directory-input');
   expect(inputEl).toBeInTheDocument();
-  expect(inputEl).toHaveAttribute('placeholder', 'Enter the directory to monitoring');
+  expect(inputEl).toHaveAttribute('placeholder', 'Enter the directory for example /home/user/Documents');
 
   const buttonCancelEl = screen.getByRole('cancel-modal-button');
   expect(buttonCancelEl).toBeInTheDocument();
