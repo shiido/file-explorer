@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="../assets/logo.png" width="400" alt="File-Explorer Logo" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Description
 
-## Available Scripts
+Frontend App allows:
 
-In the project directory, you can run:
+- View the changes that have occurred in the directories that are under monitoring in real time
+- Add new directories to monitor
 
-### `npm start`
+# Requirements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- node **v12.16.3**
+- npm **v6.14.4**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Technologies
 
-### `npm test`
+- [React](https://reactjs.org/)
+- [Socket.IO](https://socket.io/)
+- [Redux](https://redux.js.org/)
+- [Chakra](https://chakra-ui.com/)
+- TypeScript
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Receive Data Workflow
 
-### `npm run build`
+The flow carried out to view a directory that it is under monitoring is described below:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="../assets/diagram-frontend.png" width="1000" />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. The home component receives the data from the websocket server
+2. The home component dispatch an action to filter data
+3. The reducer receives the data
+4. The reducer filters the data
+5. The home component detects the new data
+6. Finally the home component render the page with the new data
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation
 
-### `npm run eject`
+```bash
+$ npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Running the server
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+$ REACT_APP_FOLDERS=/home npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The app will open here: http://localhost:3000
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Test
 
-## Learn More
+```bash
+$ npm test
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+File-Explorer Frontend is [MIT licensed](LICENSE).
