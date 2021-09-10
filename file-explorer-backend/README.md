@@ -36,13 +36,13 @@ The flow carried out to monitor a directory is described below:
 5. Event-Bus notifies to Socket-Gateway change has occurred
 6. Socket-Gateway broadcasts the changes to all connected sockets
 
-## Installation
+# Installation
 
 ```bash
 $ npm install
 ```
 
-## Running the server
+# Running the server
 
 ```bash
 $ npm run start
@@ -50,7 +50,7 @@ $ npm run start
 
 The server will start here: http://localhost:3011
 
-## Test
+# Test
 
 ```bash
 # unit tests
@@ -60,6 +60,6 @@ $ npm run test
 $ npm run test:cov
 ```
 
-## License
+# License
 
 File-Explorer Backend is [MIT licensed](LICENSE).

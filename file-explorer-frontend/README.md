@@ -35,13 +35,13 @@ The flow carried out to view a directory that it is under monitoring is describe
 5. The home component detects the new data
 6. Finally the home component render the page with the new data
 
-## Installation
+# Installation
 
 ```bash
 $ npm install
 ```
 
-## Running the server
+# Running the app
 
 ```bash
 $ REACT_APP_FOLDERS=/home npm start
@@ -49,12 +49,12 @@ $ REACT_APP_FOLDERS=/home npm start
 
 The app will open here: http://localhost:3000
 
-## Test
+# Test
 
 ```bash
 $ npm test
 ```
 
-## License
+# License
 
 File-Explorer Frontend is [MIT licensed](LICENSE).
