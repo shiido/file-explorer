@@ -19,7 +19,9 @@ Backend Server allows:
 
 - [NestJS](https://nestjs.com/)
 - [Socket.IO](https://socket.io/)
+- Clean architecture
 - DDD
+- TypeScript
 
 # Folder Monitoring Workflow
 
@@ -46,6 +48,8 @@ $ npm install
 $ npm run start
 ```
 
+The server will start here: http://localhost:3011
+
 ## Test
 
 ```bash
@@ -58,4 +62,4 @@ $ npm run test:cov
 
 ## License
 
-File-Explorer is [MIT licensed](LICENSE).
+File-Explorer Backend is [MIT licensed](LICENSE).
