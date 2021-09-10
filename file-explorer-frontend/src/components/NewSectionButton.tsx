@@ -47,7 +47,7 @@ const NewSectionButton: React.FC<FuncProps> = (props: FuncProps) => {
 
                      <FormLabel htmlFor="directory">Directory</FormLabel>
 
-                     <Input role="new-directory-input" size="xs" id="directory" placeholder="Enter the directory to monitoring"
+                     <Input role="new-directory-input" size="xs" id="directory" placeholder="Enter the directory for example /home/user/Documents"
                         {
                         ...register("directory",
                            {
